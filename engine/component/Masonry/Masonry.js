@@ -17,8 +17,8 @@ export default function Masonry({
   const masonryStyles = {
     gridTemplateColumns: `repeat(auto-fit , minMax(${Math.floor(
       (parseInt(masonry.width) -
-        parseInt(horizontalPadding) * remSizing * 2 -
-        (masonry.column - 1) * remSizing) /
+        parseInt(horizontalPadding) * (remSizing * 2) -
+        (masonry.column - 1) * (parseInt(masonry.gap) * 16)) /
         masonry.column
     )}px, 1fr))`,
     gridGap: `${masonry.gap ? masonry.gap : "1rem"}`,

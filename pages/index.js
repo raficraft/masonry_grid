@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   const [params, setParams] = useState({
     column: 4,
-    gap: "0.5rem",
+    gap: "1rem",
     width: "1330",
   });
 
@@ -16,9 +16,6 @@ export default function Home() {
 
     if (fields === "gap") {
       val = e.target.value + "rem";
-    }
-    if (fields === "width") {
-      val = e.target.value + "px";
     }
 
     setParams((S) => ({ ...S, [`${fields}`]: val }));
