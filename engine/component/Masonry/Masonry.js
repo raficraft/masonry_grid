@@ -83,7 +83,7 @@ export default function Masonry({
 
   return (
     <>
-      {!loading ? (
+      {!loading && imgCollection !== [] ? (
         <section
           style={{
             maxWidth: masonry.width ? masonry.width : "960px",
