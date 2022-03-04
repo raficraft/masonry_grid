@@ -1,0 +1,18 @@
+@import "./../../../Sass/abstract/function.scss";
+@import "./../../../Sass/abstract/variables.scss";
+
+.header_top {
+  background-color: rgb(73, 73, 73);
+  width: 100%;
+  padding: 1rem;
+  margin: 0 0 2rem;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+  width: 100%;
+  color: white;
+  text-align: center;
+}

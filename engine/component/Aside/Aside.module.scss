@@ -1,0 +1,98 @@
+@import "./../../../Sass/abstract/function";
+@import "./../../../Sass/abstract/variables";
+@import "./../../../Sass/abstract/animation";
+
+.aside_link {
+  position: fixed;
+  @include flex(column, nowrap, center, center);
+  max-width: 8rem;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 1500;
+  left: 0;
+
+  &[data-show="false"] {
+    left: -8rem;
+  }
+  &[data-show="true"] {
+    animation-name: left_TO_origin;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+
+    .mobil_toggle {
+      background-color: rgb(184, 196, 209);
+      height: 2.5rem;
+      .dotted_menu:before {
+        top: -8px;
+      }
+      .dotted_menu:after {
+        top: 8px;
+      }
+    }
+  }
+
+  &_container {
+    background-color: rgb(218, 218, 218);
+    padding: 1rem;
+    width: 8rem;
+    @include flex(column, nowrap, center, center);
+    box-shadow: $standartShadow;
+    border-radius: 3px;
+    border-top: 1px solid $black;
+    border-right: 1px solid $black;
+    border-bottom: 1px solid $black;
+  }
+
+  .mobil_toggle {
+    @include size(1.25rem, 2rem);
+    position: absolute;
+    content: "";
+    background-color: rgb(160, 160, 160);
+    right: calc(-1.25rem + 1px);
+    z-index: 100;
+    @include flex(column, nowrap, center, center);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: spacing(1) 0;
+    box-shadow: $standartShadow;
+    pointer-events: all;
+    cursor: pointer;
+    border: none;
+    border-top: 1px solid $black;
+    border-right: 1px solid $black;
+    border-bottom: 1px solid $black;
+    transition: $shortTime;
+
+    &:hover {
+      background-color: rgb(184, 196, 209);
+      height: 2.5rem;
+      .dotted_menu:before {
+        top: -8px;
+      }
+      .dotted_menu:after {
+        top: 8px;
+      }
+    }
+
+    .dotted_menu,
+    .dotted_menu:before,
+    .dotted_menu:after {
+      @include flex(column, nowrap, center, center);
+      @include circle();
+      @include size(4px, 4px);
+      content: "";
+      background-color: $black;
+      position: absolute;
+      transition: $shortTime;
+    }
+
+    .dotted_menu:before {
+      top: -6px;
+    }
+    .dotted_menu:after {
+      top: 6px;
+    }
+  }
+}

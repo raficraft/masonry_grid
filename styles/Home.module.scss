@@ -1,0 +1,40 @@
+@import "./../Sass/abstract/function.scss";
+@import "./../Sass/abstract/variables.scss";
+
+.main {
+  min-height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.description {
+  background-color: white;
+  box-shadow: 0 0 5px 0 rgb(114, 114, 114);
+  max-width: 960px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem 1rem 4rem;
+}
+
+.bloc_input_col {
+  @include flex(column, nowrap, flex-start, flex-start);
+  margin: 0.75em 0;
+  label {
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin: 0 0 0.5rem 0;
+  }
+  input {
+    height: 2rem;
+    font-size: 1rem;
+    max-width: 5rem;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+  }
+}
