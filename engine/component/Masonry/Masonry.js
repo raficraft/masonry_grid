@@ -31,11 +31,7 @@ export default function Masonry({
       return imgCollection.map((file, idx) => {
         //console.log("calc", file.height / file.width);
         return (
-          <span
-            key={idx}
-            data-selector="masonry_item"
-            style={{ overflow: "hidden" }}
-          >
+          <span key={idx} data-selector="masonry_item">
             <Image
               src={file.src}
               width={file.width}
