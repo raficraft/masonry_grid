@@ -81,7 +81,7 @@ export default function Masonry({
     return () => {
       window.removeEventListener("resize", getAllItem, true);
     };
-  }, [filesInfo]);
+  }, [imgCollection]);
 
   return (
     <>
