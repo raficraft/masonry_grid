@@ -72,16 +72,14 @@ export default function Masonry({
 
   useLayoutEffect(() => {
     getAllItem();
-  }, [filesInfo, masonryStyles]);
 
-  useEffect(() => {
     window.addEventListener("resize", getAllItem, true);
 
     setImgCollection(filesInfo);
     return () => {
       window.removeEventListener("resize", getAllItem, true);
     };
-  }, [imgCollection]);
+  }, [filesInfo, masonryStyles]);
 
   return (
     <>
