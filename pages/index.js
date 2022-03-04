@@ -54,7 +54,7 @@ export default function Home() {
             <input
               defaultValue={1}
               min="1"
-              step="1"
+              step=".5"
               id="gap"
               type="number"
               onChange={(e) => {
