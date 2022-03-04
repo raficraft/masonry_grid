@@ -17,13 +17,14 @@ export default function Masonry({
   const masonryStyles = {
     gridTemplateColumns: `repeat(auto-fit , minMax(${Math.floor(
       (parseInt(masonry.width) -
-        parseInt(horizontalPadding) * (remSizing * 2) -
-        (masonry.column - 1) * (parseInt(masonry.gap) * 16)) /
+        parseInt(horizontalPadding) * remSizing * 2 -
+        (masonry.column - 1) * remSizing) /
         masonry.column
     )}px, 1fr))`,
     gridGap: `${masonry.gap ? masonry.gap : "1rem"}`,
     display: "grid",
     gridAutoRows: masonry.autoRows ? masonry.autoRows : "0",
+    width: masonry.width ? masonry.width : "960px",
   };
 
   function createGallery() {
@@ -31,7 +32,7 @@ export default function Masonry({
       return imgCollection.map((file, idx) => {
         //console.log("calc", file.height / file.width);
         return (
-          <span key={idx} data-selector="masonry_item">
+          <span key={idx} data-selector="masonry_item" style={{}}>
             <Image
               src={file.src}
               width={file.width}
@@ -79,7 +80,7 @@ export default function Masonry({
       {!loading ? (
         <section
           style={{
-            maxWidth: masonry.width ? masonry.width : "960px",
+            maxWidth: masonryStyles.width,
             width: "100%",
             padding: `${verticalPadding}  ${horizontalPadding}`,
           }}
