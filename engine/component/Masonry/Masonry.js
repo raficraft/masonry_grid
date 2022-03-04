@@ -31,7 +31,11 @@ export default function Masonry({
       return imgCollection.map((file, idx) => {
         //console.log("calc", file.height / file.width);
         return (
-          <span key={idx} data-selector="masonry_item" style={{}}>
+          <span
+            key={idx}
+            data-selector="masonry_item"
+            style={{ overflow: "hidden" }}
+          >
             <Image
               src={file.src}
               width={file.width}
@@ -61,17 +65,26 @@ export default function Masonry({
     item.style.gridRowEnd = "span " + rowSpan;
   }
 
-  useLayoutEffect(() => {
+  function getAllItem() {
     if (!loading) {
       const items = document.querySelectorAll('[data-selector="masonry_item"]');
       for (const item of items) {
         resizeGridItem(item);
       }
     }
+  }
+
+  useLayoutEffect(() => {
+    getAllItem();
   }, [filesInfo, masonryStyles]);
 
   useEffect(() => {
+    window.addEventListener("resize", getAllItem, true);
+
     setImgCollection(filesInfo);
+    return () => {
+      window.removeEventListener("resize", getAllItem, true);
+    };
   }, [filesInfo]);
 
   return (
