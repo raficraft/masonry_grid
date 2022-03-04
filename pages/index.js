@@ -1,8 +1,28 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import React, { useState, useContext, useLayoutEffect, useEffect } from "react";
+import Masonry from "../engine/component/Masonry/Masonry";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const [params, setParams] = useState({
+    column: 4,
+    gap: "0.5rem",
+    width: "1330",
+  });
+
+  function handleChange(e, fields) {
+    console.log(e.target.value, fields);
+    let val = e.target.value;
+
+    if (fields === "gap") {
+      val = e.target.value + "rem";
+    }
+    if (fields === "width") {
+      val = e.target.value + "px";
+    }
+
+    setParams((S) => ({ ...S, [`${fields}`]: val }));
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -12,58 +32,63 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <header>
+          <h1 className={styles.title}>Mansonry Grid demo</h1>
+        </header>
+        <div className={styles.description}>
+          <h1>Project info</h1>
+          <p>Framework : Next.js</p>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+          <div>
+            <label htmlFor="column">Number of columns</label>
+            <input
+              defaultValue={params.column}
+              min="1"
+              id="column"
+              type="number"
+              onChange={(e) => {
+                handleChange(e, "column");
+              }}
+            />
+          </div>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          <div>
+            <label htmlFor="gap">Gap</label>
+            <input
+              defaultValue={1}
+              min="1"
+              step="1"
+              id="gap"
+              type="number"
+              onChange={(e) => {
+                handleChange(e, "gap");
+              }}
+            />
+          </div>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <div>
+            <label htmlFor="width">Masonry width</label>
+            <input
+              defaultValue={params.width}
+              min="360"
+              id="width"
+              type="number"
+              onChange={(e) => {
+                handleChange(e, "width");
+              }}
+            />
+          </div>
         </div>
+        <Masonry
+          dir="assets/img/masonry/"
+          masonry={{
+            column: params.column,
+            gap: params.gap,
+            width: `${params.width}px`,
+          }}
+          horizontalPadding="1rem"
+        ></Masonry>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
-  )
+  );
 }

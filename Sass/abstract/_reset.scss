@@ -1,0 +1,339 @@
+*,
+*:hover,
+*:after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "myFont";
+  src: url("/assets/fonts/Papyrus.ttf"),
+    url("/assets/fonts/Papyrus.ttf") format("truetype"),
+    url("/assets/fonts/papyrus-webfont.woff2") format("woff2"),
+    url("/assets/fonts/papyrus-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --container_width: 1330px;
+
+  @media screen and (max-width: 1330px) {
+    --container_width: calc(100% - 2rem);
+  }
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100%;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5rem;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  color: $text_black_light;
+  scroll-behavior: smooth;
+  background-image: url("/assets/bg/texture_01.png");
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+p,
+ul,
+ol,
+blockquote {
+  margin-bottom: 1.5em;
+}
+
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 24px;
+  font-weight: bold;
+  color: $text_black;
+}
+
+h1 {
+  font-size: 1.75em;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1.6;
+  text-decoration: underline;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1.125em;
+}
+
+h5,
+h6 {
+  font-size: 1em;
+}
+
+// ul,
+// ol {
+//   margin-left: 2.5rem;
+// }
+ul {
+  list-style-type: square;
+}
+
+ol {
+  list-style: decimal;
+}
+
+button {
+  cursor: pointer;
+}
+
+#__next {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: hidden;
+  min-height: 100%;
+  height: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  position: top;
+  right: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(167, 167, 167);
+}
+
+.separator {
+  margin: spacing(6) 0;
+  content: "";
+  @include size(100%, 1px);
+  position: relative;
+  background-color: lighten(grey, 20%);
+  display: block;
+}
+
+video {
+  cursor: pointer;
+}
+
+//Design System Class atomic
+
+.bg_blue {
+  background-color: $blue;
+}
+.bg_green {
+  background-color: $green;
+}
+.bg_red {
+  background-color: $red;
+}
+.bg_yellow {
+  background-color: $yellow;
+}
+.bg_champagne {
+  background-color: $champagne;
+}
+.bg_gunMetal {
+  background-color: $gunMetal;
+}
+.bg_blackChocolate {
+  background-color: $blackChocolate;
+}
+.bg_englishViolet {
+  background-color: $englishViolet;
+}
+
+.text_blue {
+  color: $blue;
+}
+
+.text_green {
+  color: $green;
+}
+
+.text_red {
+  color: $red;
+}
+
+.text_yellow {
+  color: $yellow;
+}
+
+.text_champagne {
+  color: $champagne;
+}
+
+.text_gunMetal {
+  color: $gunMetal;
+}
+
+.text_blackChocolate {
+  color: $blackChocolate;
+}
+
+.text_englishViolet {
+  color: $englishViolet;
+}
+
+b {
+  font-weight: bold;
+}

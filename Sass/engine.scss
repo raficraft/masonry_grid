@@ -1,0 +1,15 @@
+@import "./abstract/variables.scss";
+@import "./abstract/function.scss";
+@import "./abstract/animation.scss";
+@import "./abstract/reset.scss";
+
+@import "./lib/global.scss";
+@import "./lib/atomic/tex.scss";
+@import "./lib/form/form.scss";
+@import "./lib/form/btn.scss";
+
+@import "./lib/component/dotMenu.scss";
+@import "./lib/component/paginate.scss";
+@import "./lib/component/heroes.scss";
+
+@import "./lib/pages/home.scss";

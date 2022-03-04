@@ -1,0 +1,71 @@
+.primary_content {
+  width: var(--container_width);
+
+  @media screen and (max-width: 1439px) {
+    width: calc(100% - 2rem);
+  }
+}
+
+.layout {
+  position: relative;
+}
+
+.wrapper {
+  @include flex(column, nowrap, flex-start, center);
+  flex: 1;
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  .content {
+    @include flex(column, wrap, center, center);
+    flex: 1;
+    max-width: 1120px;
+    width: 100%;
+    padding: spacing(8) 0 spacing(6);
+  }
+}
+
+.oldLink {
+  text-decoration: underline;
+  color: rgb(255, 0, 111) !important;
+  h1 {
+    color: rgb(255, 0, 111) !important;
+  }
+}
+
+//For firestore test remove
+
+.wrapper_edit {
+  width: 960px;
+  @include flex(column, wrap, center, center);
+  margin: auto;
+}
+
+.mainContent {
+  @include flex(column, wrap, center, center);
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+}
+
+button[disabled] {
+  background-color: darken($grey, 40%);
+}
+
+.article {
+  p {
+    line-height: 1.8rem;
+  }
+}
+
+.text {
+  &-center {
+    text-align: center;
+  }
+
+  &-bold {
+    font-weight: bold;
+  }
+}
