@@ -1,8 +1,18 @@
 //Inspired by this article : https://w3bits.com/css-grid-masonry/
 
 import Image from "next/image";
-import React, { useState, useContext, useLayoutEffect, useEffect } from "react";
+import React, { useEffect } from "react";
 import useGetimage from "../../hooks/file/useGetImage";
+
+/**
+ *
+ * @param {String} dir //path of files to display in the /public folder
+ * @param {Object} masonry //Rules css for construct the masonry grid
+ * @param {Number} remSizing // Default font-size css
+ * @param {Number} horizontalPadding // Left and Right padding for the masonry container
+ * @param {Number} verticalPadding // Top and Bottom padding for the masonry
+ *
+ */
 
 export default function Masonry({
   dir = null,
@@ -61,13 +71,23 @@ export default function Masonry({
     item.style.gridRowEnd = "span " + rowSpan;
   }
 
-  useEffect(() => {
+  function getItems() {
     if (!loading) {
       const items = document.querySelectorAll('[data-selector="masonry_item"]');
       for (const item of items) {
         resizeGridItem(item);
       }
     }
+  }
+
+  useEffect(() => {
+    getItems();
+    window.addEventListener("resize", getItems, true);
+
+    return () => {
+      getItems();
+      window.removeEventListener("resize", getItems, true);
+    };
   }, [filesInfo, masonryStyles]);
 
   return (
@@ -75,7 +95,7 @@ export default function Masonry({
       {!loading ? (
         <section
           style={{
-            maxWidth: masonryStyles.width,
+            maxWidth: masonry.width ? masonry.width : "960px",
             width: "100%",
             padding: `${verticalPadding}  ${horizontalPadding}`,
           }}
