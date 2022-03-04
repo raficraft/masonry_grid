@@ -50,21 +50,22 @@ export default function Masonry({
     }
   }
 
-  function resizeGridItem(item) {}
+  function resizeGridItem(item) {
+    const rowGap = parseFloat(masonryStyles.gridGap);
+    const rowSpan = Math.ceil(
+      item
+        .querySelector('[data-selector="masonry_img"]')
+        .getBoundingClientRect().height /
+        (remSizing * rowGap)
+    );
+    item.style.gridRowEnd = "span " + rowSpan;
+  }
 
-  useLayoutEffect(() => {
-    console.log("trigger useLayoutEffect", loading);
+  useEffect(() => {
     if (!loading) {
       const items = document.querySelectorAll('[data-selector="masonry_item"]');
       for (const item of items) {
-        const rowGap = parseFloat(masonryStyles.gridGap);
-        const rowSpan = Math.ceil(
-          item
-            .querySelector('[data-selector="masonry_img"]')
-            .getBoundingClientRect().height /
-            (remSizing * rowGap)
-        );
-        item.style.gridRowEnd = "span " + rowSpan;
+        resizeGridItem(item);
       }
     }
   }, [filesInfo, masonryStyles]);
