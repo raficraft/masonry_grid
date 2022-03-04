@@ -12,7 +12,6 @@ export default function Masonry({
   verticalPadding = "0",
 }) {
   const [filesInfo, loading] = useGetimage(dir);
-  const [imgCollection, setImgCollection] = useState([]);
 
   const masonryStyles = {
     gridTemplateColumns: `repeat(auto-fit , minMax(${Math.floor(
@@ -28,8 +27,8 @@ export default function Masonry({
   };
 
   function createGallery() {
-    if (dir && dir !== null && imgCollection !== []) {
-      return imgCollection.map((file, idx) => {
+    if (dir && dir !== null && filesInfo !== []) {
+      return filesInfo.map((file, idx) => {
         //console.log("calc", file.height / file.width);
         return (
           <span key={idx} data-selector="masonry_item" style={{}}>
@@ -51,29 +50,24 @@ export default function Masonry({
     }
   }
 
-  function resizeGridItem(item) {
-    const rowGap = parseFloat(masonryStyles.gridGap);
-    const rowSpan = Math.ceil(
-      item
-        .querySelector('[data-selector="masonry_img"]')
-        .getBoundingClientRect().height /
-        (remSizing * rowGap)
-    );
-    item.style.gridRowEnd = "span " + rowSpan;
-  }
+  function resizeGridItem(item) {}
 
   useLayoutEffect(() => {
+    console.log("trigger useLayoutEffect", loading);
     if (!loading) {
       const items = document.querySelectorAll('[data-selector="masonry_item"]');
       for (const item of items) {
-        resizeGridItem(item);
+        const rowGap = parseFloat(masonryStyles.gridGap);
+        const rowSpan = Math.ceil(
+          item
+            .querySelector('[data-selector="masonry_img"]')
+            .getBoundingClientRect().height /
+            (remSizing * rowGap)
+        );
+        item.style.gridRowEnd = "span " + rowSpan;
       }
     }
   }, [filesInfo, masonryStyles]);
-
-  useEffect(() => {
-    setImgCollection(filesInfo);
-  }, [filesInfo]);
 
   return (
     <>
