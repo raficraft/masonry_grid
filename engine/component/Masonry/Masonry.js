@@ -1,7 +1,7 @@
 //Inspired by this article : https://w3bits.com/css-grid-masonry/
 
 import Image from "next/image";
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import useGetimage from "../../hooks/file/useGetImage";
 
 /**
@@ -43,7 +43,11 @@ export default function Masonry({
       return filesInfo.map((file, idx) => {
         //console.log("calc", file.height / file.width);
         return (
-          <span key={idx} data-selector="masonry_item" style={{}}>
+          <span
+            key={idx}
+            data-selector="masonry_item"
+            style={{ overflow: "hidden" }}
+          >
             <Image
               src={file.src}
               width={file.width}
@@ -82,7 +86,7 @@ export default function Masonry({
     }
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getItems();
     window.addEventListener("resize", getItems, true);
 
