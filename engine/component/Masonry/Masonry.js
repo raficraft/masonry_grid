@@ -1,7 +1,7 @@
 //Inspired by this article : https://w3bits.com/css-grid-masonry/
 
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import useGetimage from "../../hooks/file/useGetImage";
 
 /**
@@ -27,13 +27,15 @@ export default function Masonry({
     gridTemplateColumns: `repeat(auto-fit , minMax(${Math.floor(
       (parseInt(masonry.width) -
         parseInt(horizontalPadding) * remSizing * 2 -
-        (masonry.column - 1) * remSizing) /
+        (masonry.column - 1) * parseFloat(masonry.gap) * remSizing) /
         masonry.column
     )}px, 1fr))`,
     gridGap: `${masonry.gap ? masonry.gap : "1rem"}`,
     display: "grid",
     gridAutoRows: masonry.autoRows ? masonry.autoRows : "0",
-    width: masonry.width ? masonry.width : "960px",
+    width: masonry.width
+      ? `calc(${masonry.width} - ${masonry.gridGap})`
+      : `calc(960px - ${masonry.gridGap})`,
   };
 
   function createGallery() {
@@ -80,7 +82,7 @@ export default function Masonry({
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getItems();
     window.addEventListener("resize", getItems, true);
 

@@ -27,6 +27,7 @@ export default function useGetimage(directory) {
             const allFiles = await res.json();
             console.log("CHECK : ", allFiles);
             for (const f of allFiles) {
+              console.log(allFiles);
               const i = await import(`/public/${directory}${f}`);
 
               filesArray.push(i.default);

@@ -45,7 +45,7 @@ export default function Home() {
           </div>
 
           <div className={S.bloc_input_col}>
-            <label htmlFor="gap">Gap</label>
+            <label htmlFor="gap">Gap (rem)</label>
             <input
               defaultValue={1}
               min="1"
@@ -59,7 +59,7 @@ export default function Home() {
           </div>
 
           <div className={S.bloc_input_col}>
-            <label htmlFor="width">Width</label>
+            <label htmlFor="width">Width (px)</label>
             <input
               defaultValue={params.width}
               min="360"
