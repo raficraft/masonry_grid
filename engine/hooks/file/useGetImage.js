@@ -5,45 +5,40 @@ export default function useGetimage(directory) {
   const [filesInfo, setFilesInfo] = useState([]);
 
   useEffect(() => {
-    if (directory && directory !== null) {
-      const fetchData = async () => {
-        const callApi = async () => {
-          const bodyRequest = {
-            dir: directory,
-          };
-
-          const res = await fetch("/api", {
-            method: "POST",
-            body: JSON.stringify(bodyRequest),
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          });
-
-          const filesArray = [];
-
-          try {
-            const allFiles = await res.json();
-            console.log("CHECK : ", allFiles);
-            for (const f of allFiles) {
-              console.log(allFiles);
-              const i = await import(`/public/${directory}${f}`);
-
-              filesArray.push(i.default);
-            }
-            setLoading(false);
-            return filesArray;
-          } catch (error) {
-            console.log(error);
-          }
+    const fetchData = async () => {
+      const filesArray = [];
+      const callApi = async (folder) => {
+        const bodyRequest = {
+          dir: folder,
         };
-        const result = await callApi();
-        setFilesInfo(result);
+
+        const res = await fetch("/api", {
+          method: "POST",
+          body: JSON.stringify(bodyRequest),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+
+        try {
+          const allFiles = await res.json();
+          for (const f of allFiles) {
+            const i = await import(`/public/${folder}${f}`);
+            filesArray.push(i.default);
+          }
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
       };
 
-      fetchData();
-    }
+      for (const folder of directory) {
+        await callApi(folder);
+      }
+      setFilesInfo(filesArray);
+    };
+    fetchData();
   }, []);
 
   return [filesInfo, loading];

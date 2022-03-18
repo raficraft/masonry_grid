@@ -6,7 +6,7 @@ import useGetimage from "../../hooks/file/useGetImage";
 
 /**
  *
- * @param {String} dir //path of files to display in the /public folder
+ * @param {Array} dir //path of files to display in the /public folder
  * @param {Object} masonry //Rules css for construct the masonry grid
  * @param {Number} remSizing // Default font-size css
  * @param {Number} horizontalPadding // Left and Right padding for the masonry container
@@ -16,7 +16,11 @@ import useGetimage from "../../hooks/file/useGetImage";
 
 export default function Masonry({
   dir = null,
-  masonry,
+  masonry = {
+    column: 4,
+    gap: "1rem",
+    width: "1330",
+  },
   remSizing = 16,
   horizontalPadding = "0",
   verticalPadding = "0",
@@ -40,6 +44,7 @@ export default function Masonry({
 
   function createGallery() {
     if (dir && dir !== null && filesInfo !== []) {
+      console.log("in costructor dom ", filesInfo);
       return filesInfo.map((file, idx) => {
         //console.log("calc", file.height / file.width);
         return (

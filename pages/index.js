@@ -73,7 +73,7 @@ export default function Home() {
         </Aside>
 
         <Masonry
-          dir="assets/img/masonry/"
+          dir={["assets/img/masonry/", "assets/img/secondary/"]}
           masonry={{
             column: params.column,
             gap: params.gap,
